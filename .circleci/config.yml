@@ -1,0 +1,52 @@
+version: 2
+env: &var_env
+  environment:
+    JEST_JUNIT_OUTPUT_DIR: reports/jest/
+    JEST_JUNIT_OUTPUT_NAME: result.xml
+build: &build_step
+  steps:
+    - checkout
+    - restore_cache:
+        key: node-alertnofification-cache-{{ checksum "package.json" }}
+    - run: npm install
+    - save_cache:
+        key: node-alertnofification-cache-{{ checksum "package.json" }}
+        paths:
+          - ./node_modules
+    - run:
+        name: test
+        command: npm test -- --collectCoverage=true --reporters="default" --reporters="jest-junit"
+    - store_artifacts:
+        path: coverage
+        prefix: coverage
+    - store_test_results:
+        path: reports/
+jobs:
+  node-8.16:
+    working_directory: ~/node-alertnofification
+    docker:
+      - image: circleci/node:8.16
+        <<: *var_env
+    <<: *build_step
+  node-10.16.3:
+    working_directory: ~/node-alertnofification
+    docker:
+      - image: circleci/node:10.16.3
+        <<: *var_env
+    <<: *build_step
+  node-12.10:
+    working_directory: ~/node-alertnofification
+    docker:
+      - image: circleci/node:12.10
+        <<: *var_env
+    <<: *build_step
+
+workflows:
+  version: 2
+  build-workflow:
+    jobs:
+      - node-8.16
+      - node-10.16.3
+      - node-12.10
+
+
