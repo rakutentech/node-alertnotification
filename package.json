@@ -1,6 +1,6 @@
 {
     "name": "node-alertnotification",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Sending Alert notification with throttling",
     "main": "index.js",
     "scripts": {

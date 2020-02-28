@@ -44,7 +44,8 @@ This library supports sending alert as email and as message card to Ms Teams' ch
 |3   |ALERT_CARD_SUBJECT   |""   | *require Alert MessageCard subject   |
 |4   |ALERT_THEME_COLOR   |""   |Themes color   |
 |5   |MS_TEAMS_WEBHOOK   |""   |*require Ms Teams webhook. <https://docs.microsoft.com/en-us/microsoftteams/platform/concepts/connectors/connectors-using> |
-|6   |   |   |   |
+|6   |MS_TEAMS_PROXY_URL   |""   |work behind corporate proxy   |
+|7   |MS_TEAMS_PROXY_PORT   |""   |work behind corporate proxy   |
 
 ### Throttling Configs
 
