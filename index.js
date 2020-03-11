@@ -11,7 +11,7 @@ function Notify(err, doNotAlert) {
     this.doNotAlert = doNotAlert || [];
 }
 Notify.prototype.send = async function() {
-    if (this.shouldAlert()) {
+    if (await this.shouldAlert()) {
         await this.dispatch()
     }
 }
@@ -27,7 +27,7 @@ Notify.prototype.dispatch = async function() {
         await msTeamsCard.sendMessageCard()
     }
 }
-Notify.prototype.shouldAlert = function() {
+Notify.prototype.shouldAlert = async function() {
     if (!this.isThrottlingEnabled) {
         //Always alert when throttling is disabled.
         return true;
@@ -35,7 +35,8 @@ Notify.prototype.shouldAlert = function() {
     if (this.isDoNotAlert()) {
         return false;
     }
-    return throttler.isThrottled(this.err);
+    const isThrottled = await throttler.isThrottled(this.err)
+    return !isThrottled
 }
 
 Notify.prototype.isDoNotAlert = function() {

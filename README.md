@@ -7,7 +7,8 @@ This library supports sending alert as email and as message card to Ms Teams' ch
 ## Installing
 
 ```bash
-    npm install --save https://github.com/rakutentech/node-alertnotifiation
+    npm install --save https://github.com/rakutentech/node-alertnotification#1.0.1
+    yarn add node-alertnotification@git+https://github.com/rakutentech/node-alertnotification#1.0.1
 ```
 
 ## Configurations
