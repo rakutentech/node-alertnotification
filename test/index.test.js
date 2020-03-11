@@ -45,7 +45,7 @@ test('test send notification with ignoring error', async() => {
     const msTeamsMock = MsTeamsMessageCard.mock.instances[0];
 
     const emailMsgMock = EmailMessage.mock.instances[0];
-    expect(notify.shouldAlert()).toBeFalsy();
+    expect(notify.shouldAlert()).toBeTruthy();
     expect(notify.isDoNotAlert()).toBeTruthy();
     expect(msTeamsMock).toBeUndefined();
     expect(emailMsgMock).toBeUndefined();
