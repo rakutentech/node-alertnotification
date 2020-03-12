@@ -28,7 +28,7 @@ Notify.prototype.dispatch = async function() {
     }
 }
 Notify.prototype.shouldAlert = async function() {
-    if (!this.isThrottlingEnabled) {
+    if (!this.isThrottlingEnabled()) {
         //Always alert when throttling is disabled.
         return true;
     }
