@@ -1,5 +1,7 @@
 const dotenv = require('dotenv').config();
 const MsTeamsMessageCard = require('../lib/ms_teams');
+const fs = require('fs')
+const path = require('path')
 jest.mock('../lib/ms_teams');
 
 const EmailMessage = require('../lib/email');
@@ -11,6 +13,21 @@ beforeEach(() => {
     MsTeamsMessageCard.mockClear();
     EmailMessage.mockClear();
 });
+afterEach(() => {
+    const cachePath = '/tmp/cache/if-you-need-to-delete-this-open-an-issue-async-disk-cache/node-alert';
+    if (fs.existsSync(cachePath)) {
+        fs.readdir(cachePath, (err, files) => {
+            if (err) throw err;
+
+            for (const file of files) {
+                fs.unlink(path.join(cachePath, file), err => {
+                    if (err) throw err;
+                });
+            }
+        });
+    }
+});
+
 test('test isDoNotAlert() true', () => {
     let notify = new Notify(new EvalError('Test notify 001'), [new EvalError('Test notify 001'), new EvalError('Test notify 002')])
     let res = notify.isDoNotAlert();

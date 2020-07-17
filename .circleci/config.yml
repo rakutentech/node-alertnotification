@@ -40,6 +40,12 @@ jobs:
       - image: circleci/node:12.10
         <<: *var_env
     <<: *build_step
+  node-14:
+    working_directory: ~/node-alertnofification
+    docker:
+      - image: circleci/node:14
+        <<: *var_env
+    <<: *build_step
 
 workflows:
   version: 2
@@ -48,5 +54,4 @@ workflows:
       - node-8.16
       - node-10.16.3
       - node-12.10
-
-
+      - node-14
