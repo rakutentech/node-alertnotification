@@ -22,12 +22,6 @@ build: &build_step
     - store_test_results:
         path: reports/
 jobs:
-  node-8.16:
-    working_directory: ~/node-alertnofification
-    docker:
-      - image: circleci/node:8.16
-        <<: *var_env
-    <<: *build_step
   node-10.16.3:
     working_directory: ~/node-alertnofification
     docker:
@@ -51,7 +45,6 @@ workflows:
   version: 2
   build-workflow:
     jobs:
-      - node-8.16
       - node-10.16.3
       - node-12.10
       - node-14
